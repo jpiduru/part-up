@@ -8,7 +8,7 @@ Meteor.methods({
     'activities.insert': function(partupId, fields) {
         check(partupId, String);
         check(fields, Partup.schemas.forms.startActivities);
-        var upper = Meteor.user();
+        var upper = Meteor.users.findOneOrFail(this.userId);
         var partup = Partups.findOneOrFail({_id: partupId});
         if (!upper || !partup.hasUpper(upper._id)) throw new Meteor.Error(401, 'unauthorized');
 

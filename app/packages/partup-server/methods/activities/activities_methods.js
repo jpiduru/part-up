@@ -55,7 +55,7 @@ Meteor.methods({
     'activities.update': function(activityId, fields) {
         check(activityId, String);
         check(fields, Partup.schemas.forms.startActivities);
-        var upper = Meteor.user();
+        var upper = Meteor.users.findOneOrFail(this.userId);
         var activity = Activities.findOneOrFail(activityId);
 
         // if (activity.isRemoved()) throw new Meteor.Error(404, 'activity_could_not_be_found');
@@ -122,7 +122,7 @@ Meteor.methods({
     'activities.remove': function(activityId) {
         check(activityId, String);
 
-        var upper = Meteor.user();
+        var upper = Meteor.users.findOneOrFail(this.userId);
         var activity = Activities.findOneOrFail(activityId);
 
         if (activity.isRemoved()) throw new Meteor.Error(404, 'activity_could_not_be_found');
@@ -199,7 +199,7 @@ Meteor.methods({
     'activities.archive': function(activityId) {
         check(activityId, String);
 
-        var upper = Meteor.user();
+        var upper = Meteor.users.findOneOrFail(this.userId);
         var activity = Activities.findOneOrFail(activityId);
 
         if (activity.isRemoved()) throw new Meteor.Error(404, 'activity_could_not_be_found');

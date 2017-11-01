@@ -21,7 +21,8 @@ var activityBaseSchema = new SimpleSchema({
     },
     name: {
         type: String,
-        max: 60
+        max: 60,
+        min: 1
     }
 });
 
